@@ -6,69 +6,67 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 18:29:51 by eerika            #+#    #+#             */
-/*   Updated: 2021/05/11 18:29:53 by eerika           ###   ########.fr       */
+/*   Updated: 2021/05/12 12:11:20 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	vert_obstacle(t_all *all, double nearY, int nearX, \
-double ray)
+double	vert_obstacle(t_all *all, double Y, int X, double ray)
 {
 	if (cos(all->angle) == 0)
 		return (ray);
-	nearX = (int)all->posX + 1;
-	all->v_dX = 1;
+	X = (int)all->posX + 1;
+	all->ray_vX = 1;
 	if (cos(all->angle) < 0)
 	{
-		nearX = (int)all->posX;
-		all->v_dX = -1;
+		X = (int)all->posX;
+		all->ray_vX = -1;
 	}
-	all->v_dY = tan(all->angle);
-	nearY = all->posY + (nearX - all->posX) * tan(all->angle);
-	while (nearX > 0 && nearX < all->map_w)
+	all->ray_vY = tan(all->angle);
+	Y = all->posY + (X - all->posX) * tan(all->angle);
+	while (X > 0 && X < all->map_w)
 	{
-		if (nearY < 0 || nearY >= all->map_h)
+		if (Y < 0 || Y >= all->map_h)
 			break ;
-		if (all->map[(int)nearY][(int)nearX - (all->v_dX == -1 ? 1 : 0)] == '1')
+		if (all->map[(int)Y][(int)X - (all->ray_vX == -1 ? 1 : 0)] == '1')
 		{
-			ray = (nearX - all->posX) / cos(all->angle);
+			ray = (X - all->posX) / cos(all->angle);
 			break ;
 		}
-		nearX += all->v_dX;
-		nearY += all->v_dY * all->v_dX;
+		X += all->ray_vX;
+		Y += all->ray_vY * all->ray_vX;
 	}
-	all->ray_pos_y = nearY;
+	all->ray_pos_y = Y;
 	return (ray);
 }
 
-double	hor_obstacle(t_all *all, double nearX, int nearY, \
-double ray)
+double	hor_obstacle(t_all *all, double X, int Y, double ray)
 {
 	if (sin(all->angle) == 0)
 		return (ray);
-	all->h_dY = -1;
-	nearY = (int)all->posY;
+	all->ray_hY = -1;
+	Y = (int)all->posY;
 	if (sin(all->angle) > 0)
 	{
-		all->h_dY = 1;
-		nearY = (int)all->posY + 1;
+		all->ray_hY = 1;
+		Y = (int)all->posY + 1;
 	}
-	all->h_dX = 1 / tan(all->angle);
-	nearX = all->posX + (nearY - all->posY) * all->h_dX;
-	while (nearY > 0 && nearY < all->map_h)
+	all->ray_hX = 1 / tan(all->angle);
+	X = all->posX + (Y - all->posY) * all->ray_hX;
+	while (Y > 0 && Y < all->map_h)
 	{
-		if (nearX < 0 || nearX >= all->map_w)
+		if (X < 0 || X >= all->map_w)
 			break ;
-		if (all->map[(int)nearY - (all->h_dY == -1 ? 1 : 0)][(int)nearX] == '1')
+		if (all->map[(int)Y - (all->ray_hY == -1 ? 1 : 0)][(int)X] == '1')
 		{
-			ray = (nearY - all->posY) / sin(all->angle);
+			ray = (Y - all->posY) / sin(all->angle);
 			break ;
 		}
-		nearY += all->h_dY;
-		nearX += all->h_dX * all->h_dY;
+		Y += all->ray_hY;
+		X += all->ray_hX * all->ray_hY;
 	}
-	all->ray_pos_x = nearX;
+	all->ray_pos_x = X;
 	return (ray);
 }
 

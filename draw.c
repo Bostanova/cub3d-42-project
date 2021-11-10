@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 18:19:31 by eerika            #+#    #+#             */
-/*   Updated: 2021/05/12 09:38:40 by eerika           ###   ########.fr       */
+/*   Updated: 2021/05/12 12:26:02 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,31 @@ void	draw_floor_ceil(t_all *all)
 	}
 }
 
-void	draw_wall(t_all *s, int col, double start, double len_ray)
+void	draw_wall(t_all *s, int col, double begin, double ray_len)
 {
 	int		y;
-	int		dx;
-	double	dy;
+	int		dsx;
+	double	dsy;
 	double	tex_st;
 
 	while (col < s->win_w)
 	{
-		len_ray = dist_to_wall(s, start);
-		s->wall_h = (int)(s->proj_plane / len_ray);
+		ray_len = dist_to_wall(s, begin);
+		s->wall_h = (int)(s->proj_plane / ray_len);
 		offset_y(s);
 		tex_st = (double)s->tex_h[s->ray_hit_side] / s->wall_h;
 		check_wall(s);
-		dx = s->tex_w[s->ray_hit_side] * s->x_offset;
-		dy = get_dy(s, tex_st);
+		dsx = s->tex_w[s->ray_hit_side] * s->x_offset;
+		dsy = get_dist_y(s, tex_st);
 		y = -1 * s->wall_h / 2;
 		while (y < s->wall_h / 2)
 		{
-			fast_pix_put(s, col, s->win_h / 2 + y, fast_pixel_take(s, dx, dy));
-			dy = check_dy(s, dy, tex_st);
+			fast_pix_put(s, col, s->win_h /2 +y, fast_pixel_take(s, dsx, dsy));
+			dsy = check_dist_y(s, dsy, tex_st);
 			y++;
 		}
-		s->beam_array[col] = len_ray;
-		start += s->ray_step;
+		s->array_col[col] = ray_len;
+		begin += s->ray_step;
 		col++;
 	}
 }

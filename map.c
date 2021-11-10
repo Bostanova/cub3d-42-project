@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 18:14:21 by eerika            #+#    #+#             */
-/*   Updated: 2021/05/11 18:14:38 by eerika           ###   ########.fr       */
+/*   Updated: 2021/05/12 12:26:21 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	map(t_all *all)
 	}
 	all->map[i] = 0;
 	check_map(all);
-	all->beam_array = ft_calloc(all->map_w + 1, sizeof(double) * \
+	all->array_col = ft_calloc(all->map_w + 1, sizeof(double) * \
 	all->win_w);
-	if (!all->beam_array)
+	if (!all->array_col)
 		error(-4, all);
 }

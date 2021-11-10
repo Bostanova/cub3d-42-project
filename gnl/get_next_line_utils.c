@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:49:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/05/12 10:04:36 by eerika           ###   ########.fr       */
+/*   Updated: 2021/05/12 14:18:16 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	if (!str)
+	{
 		return (0);
+	}
 	while (str[i])
+	{
 		i++;
+	}
 	return (i);
 }
 
@@ -30,9 +34,13 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 	i = 0;
 	if (!dst || !src)
+	{
 		return (0);
+	}
 	if (size == 0)
+	{
 		return (ft_strlen(src));
+	}
 	while (src[i] != '\0' && (i < size - 1))
 	{
 		dst[i] = src[i];
@@ -48,7 +56,9 @@ char	*ft_strchr(const char *str, int c)
 
 	i = 0;
 	if (!str)
+	{
 		return (NULL);
+	}
 	while (str[i] != '\0')
 	{
 		if (str[i] == c)
@@ -56,7 +66,9 @@ char	*ft_strchr(const char *str, int c)
 		i++;
 	}
 	if (str[i] == '\0' && c == '\0')
+	{
 		return ((char *)str + i);
+	}
 	return (NULL);
 }
 

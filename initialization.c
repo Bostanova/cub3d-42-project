@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 17:58:40 by eerika            #+#    #+#             */
-/*   Updated: 2021/05/12 09:38:21 by eerika           ###   ########.fr       */
+/*   Updated: 2021/05/12 13:27:54 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	init_player(t_all *all)
 	else if (all->dir == 'E')
 		all->plr_dir = M_PI * 2;
 	all->ray_step = (M_PI / 3) / all->win_w;
-	all->posX = all->posX + 0.5;
-	all->posY = all->posY + 0.5;
 	all->proj_plane = all->win_w / 2 / tan(M_PI_2 / 3);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 18:22:50 by eerika            #+#    #+#             */
-/*   Updated: 2021/05/11 18:30:53 by eerika           ###   ########.fr       */
+/*   Updated: 2021/05/12 12:27:10 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	sprites_draw(t_all *all, double dist, int i, int j)
 	while (i < all->spr_size)
 	{
 		if (all->spr_x_offset + i > 0 && all->spr_x_offset + i < all->win_w \
-			&& all->beam_array[(int)all->spr_x_offset + i] \
+			&& all->array_col[(int)all->spr_x_offset + i] \
 			+ 0.5 > dist)
 		{
 			j = 0;
